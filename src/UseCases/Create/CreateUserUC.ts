@@ -1,5 +1,5 @@
-import { User } from "../../Model/User";
-import { IUsersRepository } from "../../Repositories/IUser";
+import { User } from "../../Service/Model/User";
+import { IUsersRepository } from "../../Service/Repositories/IUser";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 export class CreateUserUC{
     constructor(private usersRepository: IUsersRepository){
