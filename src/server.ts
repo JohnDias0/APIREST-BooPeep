@@ -1,4 +1,5 @@
-const app = require('./app')
+import app from "./Presentation/View/app"
+
 const port = 2297
 
 app.listen(port, () => {
