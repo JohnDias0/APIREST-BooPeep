@@ -38,9 +38,9 @@ export class PostRepository {
             return null;
         }
     }
-    async findByUserID(user: User): Promise<Post |null>{
-        const field = 'UserID';
-        const value = user.id;
+    async findByID(id: string): Promise<Post |null>{
+        const field = 'id';
+        const value = id;
 
         try {
             const collectionRef = this.db.collection(this.collectionPath);
