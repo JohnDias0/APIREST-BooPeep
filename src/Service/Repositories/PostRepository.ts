@@ -38,20 +38,47 @@ export class PostRepository {
             return null;
         }
     }
-    async getAllPosts(): Promise<User[] | null>{
+    async findByUserID(user: User): Promise<Post |null>{
+        const field = 'UserID';
+        const value = user.id;
+
+        try {
+            const collectionRef = this.db.collection(this.collectionPath);
+            const query = collectionRef.where(field, "==", value);
+            const querySnapshot = await query.get();
+            
+            if (querySnapshot.empty) {
+                console.log("No documents found");
+                return null;
+            } else {
+                let post: Post | null = null;
+
+                querySnapshot.forEach(async (doc) => {
+                    console.log(doc.id, "=>", doc.data());
+                    post = await doc.data() as Post;
+                });
+
+                return post;
+            }
+        } catch (error) {
+            console.error(`Error finding post by userID: ${error}`);
+            return null;
+        }
+    }
+    async getAllPosts(): Promise<Post[] | null>{
         try {
             const collectionRef = this.db.collection(this.collectionPath);
             const querySnapshot = await collectionRef.get();
-            const users: User[] = [];
+            const posts: Post[] = [];
             querySnapshot.forEach((doc) => {
-                const userData = doc.data() as User;
-                users.push(userData);
+                const postData = doc.data() as Post;
+                posts.push(postData);
             });
-            if(users[1] === null){
+            if(posts[1] === null){
                 console.log('Nenhum post encontrado')
                 return null
             }
-            return users;
+            return posts;
         } catch (error) {
             console.error(`Error fetching users: ${error}`);
             return null;
