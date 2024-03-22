@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { ReadAllPostUC } from './ReadAllPostUC';
 import { Post } from '../../../Service/Model/Post';
 
-export class ReadAllUsersController {
+export class ReadAllPostController {
   constructor(
     private readAllPostUC:  ReadAllPostUC,
   ) {}

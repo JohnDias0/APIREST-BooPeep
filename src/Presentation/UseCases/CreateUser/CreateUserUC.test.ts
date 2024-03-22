@@ -1,7 +1,4 @@
-import { User } from "../../../Service/Model/User";
 import { UsersRepository as UserRepository } from "../../../Service/Repositories/UsersRepository";
-import { ICreateUserRequestDTO } from "./CreateUserDTO";
-import { CreateUserUC } from "./CreateUserUC";
 
 describe('UserRepository', () => {
   let userRepository: UserRepository;

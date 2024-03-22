@@ -1,30 +1,26 @@
 import { Request, Response } from 'express';
-import { CreatePostUC } from './CreatePostUC';
+import { UpdatePostUC } from "./UpdatePostUC";
 
-export class CreatePostController {
+export class UpdatePostController {
     constructor(
-        private createPostUC: CreatePostUC,
+        private updatePostUC: UpdatePostUC,
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
         const {
-            description,
-            data,
-            local,
-            status,
-            UserID
+            postID,
+            fieldToUpdate,
+            newValue,
         } = request.body;
 
         try {
-            await this.createPostUC.execute({
-                description,
-                data,
-                local,
-                status,
-                UserID
+            const updatedPost = await this.updatePostUC.execute({
+                postID,
+                fieldToUpdate,
+                newValue
             })
 
-            return response.status(201).send();
+            return response.status(200).send(updatedPost);
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.error(`Erro: ${error.message}`);
